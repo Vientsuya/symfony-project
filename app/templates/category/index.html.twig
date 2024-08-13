@@ -28,14 +28,15 @@
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>
-                        <a href="{{ url('show_task_list', {category: category.title}) }}" title="{{ 'action
+                        <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action
                         .show'|trans
                         }}">
                             {{ category.title }}
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('show_task_list', {category: category.title}) }}" title="{{ 'action.show'|trans }}">
+                        <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action
+                        .show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
                     </td>

@@ -31,7 +31,7 @@
                     <td>{{ task.updatedAt|format_date('long') }}</td>
                     <td>{{ task.title }}</td>
                     <td>
-                        <a href="{{ url('show_task_list', {category: task.category.title}) }}" title="{{ 'action
+                        <a href="{{ url('show_task_list', {categoryName: task.category.title}) }}" title="{{ 'action
                         .show'|trans
                         }}">
                             {{ task.category.title }}
