@@ -42,9 +42,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @param string $categoryName
      * @param int $page
-     * @return Response
      */
     #[Route('/categories/{categoryName}', name: 'show_task_list', methods: 'GET')]
     public function showTaskList(string $categoryName, #[MapQueryParameter] int $page = 1): Response
@@ -53,7 +51,6 @@ class CategoryController extends AbstractController
 
         return $this->render('category/show_task_list.html.twig', ['pagination' => $pagination, 'category' => $categoryName]);
     }
-
 
     /**
      * Create action.
@@ -89,7 +86,6 @@ class CategoryController extends AbstractController
             ['form' => $form->createView()]
         );
     }
-
 
     /**
      * Edit action.
@@ -143,10 +139,23 @@ class CategoryController extends AbstractController
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Category $category): Response
     {
-        $form = $this->createForm(FormType::class, $category, [
-            'method' => 'DELETE',
-            'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),
-        ]);
+        if (!$this->categoryService->canBeDeleted($category)) {
+            $this->addFlash(
+                'warning',
+                $this->translator->trans('message.category_contains_tasks')
+            );
+
+            return $this->redirectToRoute('category_index');
+        }
+
+        $form = $this->createForm(
+            FormType::class,
+            $category,
+            [
+                'method' => 'DELETE',
+                'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),
+            ]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
