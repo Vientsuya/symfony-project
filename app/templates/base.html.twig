@@ -12,6 +12,29 @@
     {% endblock %}
 </head>
 <body>
+
+<header class="bg-dark text-white py-3">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="{{ path('task_index') }}">My Movie Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li>
+                    <a class="nav-link" href="{{ path('task_index') }}">All Posts</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('category_index') }}">Categories</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
 <main role="main" class="container-fluid">
     <div class="container-fluid">
         {% include 'default/_flash_messages.html.twig' %}

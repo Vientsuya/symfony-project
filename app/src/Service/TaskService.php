@@ -23,7 +23,7 @@ class TaskService implements TaskServiceInterface
      *
      * @constant int
      */
-    private const PAGINATOR_ITEMS_PER_PAGE = 10;
+    private const PAGINATOR_ITEMS_PER_PAGE = 12;
 
     /**
      * Constructor.

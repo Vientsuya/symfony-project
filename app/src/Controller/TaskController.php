@@ -37,7 +37,7 @@ class TaskController extends AbstractController
     {
         $pagination = $this->taskService->getPaginatedList($page);
 
-        return $this->render('task/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('task/main.html.twig', ['pagination' => $pagination]);
     }
 
     /**

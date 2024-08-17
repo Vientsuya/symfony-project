@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.task_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.task_list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <main class="container my-5">
+            <div class="row">
+                {% for task in pagination.items %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="#" class="card-img-top" alt="{{ task.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ task.title }}</h5>
+                                <p class="card-text">{{ task.title }}</p>
+                                <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
+                                    {{ 'action.show'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'message.empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
