@@ -66,6 +66,22 @@
                 <source>action.back_to_list</source>
                 <target>Back to list</target>
             </trans-unit>
+            <trans-unit id="action.edit">
+                <source>action.edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="action.delete">
+                <source>action.delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="action.create">
+                <source>action.create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="category.category_list">
+                <source>category.category_list</source>
+                <target>Category list</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

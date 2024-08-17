@@ -38,11 +38,16 @@ class CategoryController extends AbstractController
     {
         $pagination = $this->categoryService->getPaginatedList($page);
 
-        return $this->render('category/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('category/main.html.twig', ['pagination' => $pagination]);
     }
 
     /**
-     * @param int $page
+     * Show tasks from a category action.
+     *
+     * @param string $categoryName Category name
+     * @param int    $page         Page number
+     *
+     * @return Response HTTP response
      */
     #[Route('/categories/{categoryName}', name: 'show_task_list', methods: 'GET')]
     public function showTaskList(string $categoryName, #[MapQueryParameter] int $page = 1): Response

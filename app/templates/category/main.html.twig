@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.task_list'|trans }}
+    {{ 'category.category_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center">{{ 'title.task_list'|trans }}</h1>
+    <h1 class="text-center">{{ 'category.category_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -14,14 +14,16 @@
 
         <main class="container my-5">
             <div class="row">
-                {% for task in pagination.items %}
+                {% for category in pagination.items %}
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
-                            <img src="#" class="card-img-top" alt="{{ task.title }}">
+                            <img src="#" class="card-img-top" alt="{{ category.title }}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ task.title }}</h5>
-                                <p class="card-text">{{ task.title }}</p>
-                                <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
+                                <h5 class="card-title">{{ category.title }}</h5>
+                                <p class="card-text">{{ category.title }}</p>
+                                <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action
+                                .show'|trans
+                                }}">
                                     {{ 'action.show'|trans }}
                                 </a>
                             </div>
