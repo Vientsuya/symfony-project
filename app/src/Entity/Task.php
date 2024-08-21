@@ -54,6 +54,9 @@ class Task
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Category $category = null;
 
+    #[ORM\OneToOne(mappedBy: 'task', cascade: ['persist', 'remove'])]
+    private ?Thumbnail $thumbnail = null;
+
     /**
      * Getter for Id.
      *
@@ -132,6 +135,23 @@ class Task
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?Thumbnail
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(Thumbnail $thumbnail): static
+    {
+        // set the owning side of the relation if necessary
+        if ($thumbnail->getTask() !== $this) {
+            $thumbnail->setTask($this);
+        }
+
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

@@ -24,6 +24,13 @@
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>
+
+        <a href="{{ url('thumbnail_create', {taskId: task.id}) }}" title="{{ 'action
+                        .add_thumbnail'|trans
+        }}">
+            {{ 'action.add_thumbnail'}}
+        </a>
+
     {% else %}
         <p>
             {{ 'message.record_not_found'|trans }}

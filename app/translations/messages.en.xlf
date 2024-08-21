@@ -82,6 +82,10 @@
                 <source>category.category_list</source>
                 <target>Category list</target>
             </trans-unit>
+            <trans-unit id="message.category_contains_tasks">
+                <source>message.category_contains_tasks</source>
+                <target>Category contains tasks</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1,6 +1,9 @@
 twig:
     file_name_pattern: '*.twig'
     form_themes: [ 'bootstrap_5_horizontal_layout.html.twig' ]
+    globals:
+        thumbnails_directory: 'uploads/thumbnails/'
+
 when@test:
     twig:
         strict_variables: true
