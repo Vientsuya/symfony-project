@@ -20,7 +20,7 @@
                             {% if task.thumbnail %}
                                 <img src="{{ asset('uploads/thumbnails/' ~ task.thumbnail.filename) }}" alt="Thumbnail">
                             {% else %}
-                                <p>No thumbnail available.</p>
+                                <p class="text-center">{{ 'label.no_thumbnail_available'|trans }}</p>
                             {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">{{ task.title }}</h5>

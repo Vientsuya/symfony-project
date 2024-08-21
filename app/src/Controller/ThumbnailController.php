@@ -45,17 +45,17 @@ class ThumbnailController extends AbstractController
     #[Route(
         '/create/{taskId}',
         name: 'thumbnail_create',
+        requirements: ['taskId' => '[1-9]\d*'],
         methods: 'GET|POST'
     )]
     public function create(Request $request, int $taskId): Response
     {
-        echo $taskId;
         $task = $this->taskRepository->find($taskId);
 
         if ($task->getThumbnail()) {
             return $this->redirectToRoute(
                 'thumbnail_edit',
-                ['id' => $taskId]
+                ['id' => $task->getThumbnail()->getId(), 'taskId' => $taskId]
             );
         }
 
@@ -93,31 +93,30 @@ class ThumbnailController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request $request HTTP request
-     * @param Avatar  $avatar  Avatar entity
+     * @param Request   $request   HTTP request
+     * @param Thumbnail $thumbnail Thumbnail entity
      *
      * @return Response HTTP response
      */
     #[Route(
-        '/{id}/edit',
+        '/{id}/edit/{taskId}',
         name: 'thumbnail_edit',
-        requirements: ['id' => '[1-9]\d*'],
+        requirements: ['id' => '[1-9]\d*', 'taskId' => '[1-9]\d*'],
         methods: 'GET|PUT'
     )]
-    public function edit(Request $request, Avatar $avatar): Response
+    public function edit(Request $request, Thumbnail $thumbnail, int $taskId): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        if (!$user->getAvatar()) {
-            return $this->redirectToRoute('avatar_create');
+        $task = $this->taskRepository->find($taskId);
+        if (!$task->getThumbnail()) {
+            return $this->redirectToRoute('thumbnail_create');
         }
 
         $form = $this->createForm(
-            AvatarType::class,
-            $avatar,
+            ThumbnailType::class,
+            $thumbnail,
             [
                 'method' => 'PUT',
-                'action' => $this->generateUrl('avatar_edit', ['id' => $avatar->getId()]),
+                'action' => $this->generateUrl('thumbnail_edit', ['id' => $thumbnail->getId(), 'taskId' => $taskId]),
             ]
         );
         $form->handleRequest($request);
@@ -125,10 +124,10 @@ class ThumbnailController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
-            $this->avatarService->update(
+            $this->thumbnailService->update(
                 $file,
-                $avatar,
-                $user
+                $thumbnail,
+                $task
             );
 
             $this->addFlash(
@@ -140,10 +139,10 @@ class ThumbnailController extends AbstractController
         }
 
         return $this->render(
-            'avatar/edit.html.twig',
+            'thumbnail/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'avatar' => $avatar,
+                'thumbnail' => $thumbnail,
             ]
         );
     }

@@ -58,6 +58,10 @@
                 <source>title.task_details</source>
                 <target>Task details</target>
             </trans-unit>
+            <trans-unit id="title.post_list">
+                <source>title.post_list</source>
+                <target>Post list</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Show</target>
