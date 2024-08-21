@@ -63,8 +63,4 @@ class ThumbnailService implements ThumbnailServiceInterface
         $thumbnail->setFilename($thumbnailFilename);
         $this->thumbnailRepository->save($thumbnail);
     }
-
-    public function getThumbnailForTask(int $taskId): ?Thumbnail
-    {
-    }
 }

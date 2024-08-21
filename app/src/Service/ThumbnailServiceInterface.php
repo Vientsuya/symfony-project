@@ -31,10 +31,4 @@ interface ThumbnailServiceInterface
      * @param Task         $task         Task
      */
     public function update(UploadedFile $uploadedFile, Thumbnail $thumbnail, Task $task): void;
-
-    /**
-     * @param int $taskId Id of a Task
-     * @return Thumbnail|null Thumbnail entity
-     */
-    public function getThumbnailForTask(int $taskId): ?Thumbnail;
 }
