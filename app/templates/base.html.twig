@@ -29,6 +29,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('category_index') }}">Categories</a>
                     </li>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li class="nav-item">
+                            <div>{{ app.user.email }}</div>
+                            <div>
+                                <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <div>
+                                <a href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
+                            </div>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
