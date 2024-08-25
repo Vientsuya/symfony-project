@@ -5,7 +5,7 @@
 
 namespace App\Service;
 
-use App\Entity\Category;
+use App\Entity\Task;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -22,5 +22,10 @@ interface TaskServiceInterface
      */
     public function getPaginatedList(int $page): PaginationInterface;
 
-
+    /**
+     * Save entity.
+     *
+     * @param Task $task Task entity
+     */
+    public function save(Task $task): void;
 }

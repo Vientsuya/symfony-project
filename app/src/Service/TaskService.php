@@ -5,7 +5,10 @@
 
 namespace App\Service;
 
+use App\Entity\Task;
 use App\Repository\TaskRepository;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -33,6 +36,19 @@ class TaskService implements TaskServiceInterface
      */
     public function __construct(private readonly TaskRepository $taskRepository, private readonly PaginatorInterface $paginator)
     {
+    }
+
+    /**
+     * Save entity.
+     *
+     * @param Task $task Task entity
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function save(Task $task): void
+    {
+        $this->taskRepository->save($task);
     }
 
     /**
