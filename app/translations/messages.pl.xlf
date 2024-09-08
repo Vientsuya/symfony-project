@@ -38,6 +38,10 @@
                 <source>label.no_thumbnail_available</source>
                 <target>Ten post nie ma miniaturki</target>
             </trans-unit>
+            <trans-unit id="label.thumbnail">
+                <source>label.thumbnail</source>
+                <target>Miniaturka</target>
+            </trans-unit>
             <trans-unit id="message.empty_list">
                 <source>message.empty_list</source>
                 <target>Lista jest pusta.</target>
@@ -45,6 +49,10 @@
             <trans-unit id="message.record_not_found">
                 <source>message.record_not_found</source>
                 <target>Rekord nieznaleziony.</target>
+            </trans-unit>
+            <trans-unit id="message.created_successfully">
+                <source>message.created_successfully</source>
+                <target>Akcja wykonana pomyślnie.</target>
             </trans-unit>
             <trans-unit id="title.post_list">
                 <source>title.post_list</source>
@@ -66,6 +74,10 @@
                 <source>title.task_details</source>
                 <target>Szczegóły zadania</target>
             </trans-unit>
+            <trans-unit id="title.thumbnail_create">
+                <source>title.thumbnail_create</source>
+                <target>Ustaw miniaturke</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Pokaż</target>
@@ -85,6 +97,18 @@
             <trans-unit id="action.create">
                 <source>action.create</source>
                 <target>Utwórz</target>
+            </trans-unit>
+            <trans-unit id="action.add_thumbnail">
+                <source>action.add_thumbnail</source>
+                <target>Dodaj miniaturke</target>
+            </trans-unit>
+            <trans-unit id="action.logout">
+                <source>action.logout</source>
+                <target>Wyloguj się</target>
+            </trans-unit>
+            <trans-unit id="action.save">
+                <source>action.save</source>
+                <target>Zapisz</target>
             </trans-unit>
             <trans-unit id="category.category_list">
                 <source>category.category_list</source>

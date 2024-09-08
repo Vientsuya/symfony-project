@@ -25,10 +25,9 @@
             </a>
         </p>
 
-        <a href="{{ url('thumbnail_create', {taskId: task.id}) }}" title="{{ 'action
-                        .add_thumbnail'|trans
+        <a href="{{ url('thumbnail_create', {taskId: task.id}) }}" title="{{ 'action.add_thumbnail'|trans
         }}">
-            {{ 'action.add_thumbnail'}}
+            {{ 'action.add_thumbnail'|trans }}
         </a>
 
     {% else %}
