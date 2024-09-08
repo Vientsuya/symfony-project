@@ -16,32 +16,32 @@
             <div class="row">
                 {% for category in pagination.items %}
                     <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <img src="#" class="card-img-top" alt="{{ category.title }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ category.title }}</h5>
-                                <p class="card-text">{{ category.title }}</p>
-                                <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action
-                                .show'|trans
-                                }}">
+                        <div class="card h-100 d-flex flex-column">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center font-weight-bold" style="font-size: 1.5rem;">{{ category.title }}</h5>
+                            </div>
+                            <div class="card-footer mt-auto text-center">
+                                <a href="{{ url('show_task_list', {categoryName: category.title}) }}" class="btn btn-primary" title="{{ 'action.show'|trans }}">
                                     {{ 'action.show'|trans }}
                                 </a>
+                                {% if is_granted('EDIT', category) %}
+                                    <a href="{{ url('category_edit', {id: category.id}) }}" class="btn btn-secondary" title="{{ 'action.edit'|trans }}">
+                                        {{ 'action.edit'|trans }}
+                                    </a>
+                                {%endif %}
 
-                                <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action
-                        .show'|trans }}">
-                                    {{ 'action.edit'|trans }}
-                                </a>
-
-                                <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action
-                        .show'|trans }}">
-                                    {{ 'action.delete'|trans }}
-                                </a>
+                                {% if is_granted('DELETE', category) %}
+                                    <a href="{{ url('category_delete', {id: category.id}) }}" class="btn btn-danger" title="{{ 'action.delete'|trans }}">
+                                        {{ 'action.delete'|trans }}
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </main>
+
 
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}

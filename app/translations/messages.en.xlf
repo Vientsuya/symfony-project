@@ -86,9 +86,9 @@
                 <source>category.category_list</source>
                 <target>Category list</target>
             </trans-unit>
-            <trans-unit id="message.category_contains_tasks">
-                <source>message.category_contains_tasks</source>
-                <target>Category contains tasks</target>
+            <trans-unit id="message.category_contains_posts">
+                <source>message.category_contains_posts</source>
+                <target>Category contains posts</target>
             </trans-unit>
         </body>
     </file>
