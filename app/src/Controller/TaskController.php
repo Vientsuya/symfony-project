@@ -9,6 +9,7 @@ use App\Entity\Task;
 use App\Entity\Thumbnail;
 use App\Entity\User;
 use App\Form\Type\TaskType;
+use App\Repository\UserRepository;
 use App\Service\TaskServiceInterface;
 use App\Service\ThumbnailServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -28,9 +30,7 @@ class TaskController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(private readonly TaskServiceInterface $taskService, private
-    readonly ThumbnailServiceInterface
-    $thumbnailService, private readonly TranslatorInterface $translator)
+    public function __construct(private readonly TaskServiceInterface $taskService, private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly UserRepository $userRepository)
     {
     }
 
@@ -50,6 +50,26 @@ class TaskController extends AbstractController
     }
 
     /**
+     * My tasks action.
+     *
+     * @param int $page Page number
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/my_tasks', name: 'task_my_tasks', methods: 'GET')]
+    public function myTasks(#[MapQueryParameter] int $page = 1): Response
+    {
+        $user = $this->getUser();
+        // Get the email or username (assuming they match with your entity)
+        $email = $user->getUserIdentifier();
+        // Fetch the full user entity from the database
+        $userEntity = $this->userRepository->findOneBy(['email' => $email]);
+        $pagination = $this->taskService->getusertasks($userEntity->getId(), $page);
+
+        return $this->render('task/main.html.twig', ['pagination' => $pagination]);
+    }
+
+    /**
      * Show action.
      *
      * @param Task $task Task
@@ -62,6 +82,7 @@ class TaskController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
+    #[IsGranted('VIEW', subject: 'task')]
     public function show(Task $task): Response
     {
         return $this->render('task/show.html.twig', ['task' => $task]);

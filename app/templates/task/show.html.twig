@@ -25,10 +25,12 @@
             </a>
         </p>
 
-        <a href="{{ url('thumbnail_create', {taskId: task.id}) }}" title="{{ 'action.add_thumbnail'|trans
-        }}">
-            {{ 'action.add_thumbnail'|trans }}
-        </a>
+        {% if is_granted('EDIT', task) %}
+            <a href="{{ url('thumbnail_create', {taskId: task.id}) }}" title="{{ 'action.add_thumbnail'|trans
+            }}">
+                {{ 'action.add_thumbnail'|trans }}
+            </a>
+        {% endif %}
 
     {% else %}
         <p>

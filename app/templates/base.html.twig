@@ -23,12 +23,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li>
-                    <a class="nav-link" href="{{ path('task_index') }}">All Posts</a>
+                    <a class="nav-link" href="{{ path('task_index') }}">{{ 'label.all_posts'|trans }}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('category_index') }}">Categories</a>
+                        <a class="nav-link" href="{{ path('category_index') }}">{{ 'label.categories'|trans }}</a>
                     </li>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li>
+                        <a class="nav-link" href="{{ path('task_my_tasks') }}">{{ 'label.my_posts'|trans }}</a>
+                    </li>
+                    {% endif %}
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item">

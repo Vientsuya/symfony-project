@@ -1,31 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.task_list'|trans }}
+        {{ 'title.task_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center">{{ 'title.post_list'|trans }}</h1>
+    <h1 class="text-center mt-2">{{ 'title.post_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
 
+
+
         <main class="container my-5">
             <div class="row">
                 {% for task in pagination.items %}
                     <div class="col-md-4 mb-4">
-                        <div class="card h-100">
+                        <div class="card h-100 d-flex flex-column">
                             {% if task.thumbnail %}
                                 <img src="{{ asset('uploads/thumbnails/' ~ task.thumbnail.filename) }}" alt="Thumbnail">
                             {% else %}
                                 <p class="text-center">{{ 'label.no_thumbnail_available'|trans }}</p>
                             {% endif %}
-                            <div class="card-body">
+                            <div class="card-body flex-grow-1">
                                 <h5 class="card-title">{{ task.title }}</h5>
                                 <p class="card-text">{{ task.title }}</p>
-                                <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
+                                <p class="card-text">
+                                    <small class="text-muted">{{ 'label.author'|trans }}: {{ task.author.email
+                                        }}</small>
+                                </p>
+                            </div>
+                            <div class="card-footer mt-auto">
+                                <a href="{{ url('task_show', {id: task.id}) }}" class="btn btn-primary" title="{{ 'action.show'|trans }}">
                                     {{ 'action.show'|trans }}
                                 </a>
                             </div>

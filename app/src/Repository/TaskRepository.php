@@ -53,20 +53,6 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
-     * Save entity.
-     *
-     * @param Task $task Task entity
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function save(Task $task): void
-    {
-        assert($this->_em instanceof EntityManager);
-        $this->_em->persist($task);
-        $this->_em->flush();
-    }
-
-    /**
      * Query all records.
      *
      * @return QueryBuilder Query builder
@@ -79,10 +65,6 @@ class TaskRepository extends ServiceEntityRepository
         ->orderBy('task.updatedAt', 'DESC');
     }
 
-    /**
-     * @param string $category
-     * @return QueryBuilder
-     */
     public function queryByCategory(string $category): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
@@ -140,5 +122,35 @@ class TaskRepository extends ServiceEntityRepository
             ->setParameter(':category', $category)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    /**
+     * Save entity.
+     *
+     * @param Task $task Task entity
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function save(Task $task): void
+    {
+        assert($this->_em instanceof EntityManager);
+        $this->_em->persist($task);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete a task entity.
+     *
+     * @param Task $task Task entity to delete
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function delete(Task $task): void
+    {
+        assert($this->_em instanceof EntityManager);
+        $this->_em->remove($task);
+        $this->_em->flush();
     }
 }

@@ -30,6 +30,10 @@
                 <source>label.category</source>
                 <target>Kategoria</target>
             </trans-unit>
+            <trans-unit id="label.categories">
+                <source>label.categories</source>
+                <target>Kategorie</target>
+            </trans-unit>
             <trans-unit id="label.updated_at">
                 <source>label.updated_at</source>
                 <target>Zaktualizowano</target>
@@ -41,6 +45,18 @@
             <trans-unit id="label.thumbnail">
                 <source>label.thumbnail</source>
                 <target>Miniaturka</target>
+            </trans-unit>
+            <trans-unit id="label.author">
+                <source>label.author</source>
+                <target>Autor</target>
+            </trans-unit>
+            <trans-unit id="label.all_posts">
+                <source>label.all_posts</source>
+                <target>Wszystkie posty</target>
+            </trans-unit>
+            <trans-unit id="label.my_posts">
+                <source>label.my_posts</source>
+                <target>Moje posty</target>
             </trans-unit>
             <trans-unit id="message.empty_list">
                 <source>message.empty_list</source>
