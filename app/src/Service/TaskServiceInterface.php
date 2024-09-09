@@ -6,6 +6,8 @@
 namespace App\Service;
 
 use App\Entity\Task;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -28,6 +30,16 @@ interface TaskServiceInterface
      * @param Task $task Task entity
      */
     public function save(Task $task): void;
+
+    /**
+     * Delete entity.
+     *
+     * @param Task $task Task entity
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function delete(Task $task): void;
 
     /**
      * Get paginated tasks for a specific user.

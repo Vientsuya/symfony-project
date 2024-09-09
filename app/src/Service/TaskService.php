@@ -5,6 +5,7 @@
 
 namespace App\Service;
 
+use App\Entity\Category;
 use App\Entity\Task;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
@@ -50,6 +51,19 @@ class TaskService implements TaskServiceInterface
     public function save(Task $task): void
     {
         $this->taskRepository->save($task);
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Task $task Task entity
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function delete(Task $task): void
+    {
+        $this->taskRepository->delete($task);
     }
 
     /**

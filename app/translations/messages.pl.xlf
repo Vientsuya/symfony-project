@@ -98,6 +98,10 @@
                 <source>action.show</source>
                 <target>Pokaż</target>
             </trans-unit>
+            <trans-unit id="action.add_post">
+                <source>action.add_post</source>
+                <target>Dodaj post</target>
+            </trans-unit>
             <trans-unit id="action.back_to_list">
                 <source>action.back_to_list</source>
                 <target>Wróć do listy</target>

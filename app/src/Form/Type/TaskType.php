@@ -54,7 +54,7 @@ class TaskType extends AbstractType
                 [
                     'mapped' => false,
                     'label' => 'label.thumbnail',
-                    'required' => true,
+                    'required' => false,
                     'constraints' => new Image(
                         [
                             'maxSize' => '1024k',

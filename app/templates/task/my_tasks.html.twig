@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-        {{ 'title.task_list'|trans }}
+    {{ 'title.my_task_list'|trans }}
 {% endblock %}
 
 {% block body %}
@@ -13,7 +13,19 @@
         </div>
 
         <main class="container my-5">
-            <div class="row">
+            <div class="row mb-4">
+                <!-- Add Post Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 d-flex flex-column align-items-center text-center">
+                        <div class="card-body flex-grow-1">
+                            <a href="{{ url('task_create') }}" class="btn btn-primary">
+                                {{ 'action.add_post'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task List -->
                 {% for task in pagination.items %}
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 d-flex flex-column">
@@ -26,30 +38,13 @@
                                 <h5 class="card-title">{{ task.title }}</h5>
                                 <p class="card-text">{{ task.title }}</p>
                                 <p class="card-text">
-                                    <small class="text-muted">{{ 'label.author'|trans }}: {{ task.author.email
-                                        }}</small>
+                                    <small class="text-muted">{{ 'label.author'|trans }}: {{ task.author.email }}</small>
                                 </p>
                             </div>
-
-                            <div class="card-footer mt-auto text-center">
-                                <a href="{{ url('task_show', {id: task.id}) }}" class="btn
-                                btn-primary" title="{{ 'action.show'|trans }}">
+                            <div class="card-footer mt-auto">
+                                <a href="{{ url('task_show', {id: task.id}) }}" class="btn btn-primary" title="{{ 'action.show'|trans }}">
                                     {{ 'action.show'|trans }}
                                 </a>
-
-                                {% if is_granted('EDIT', task) %}
-                                    <a href="{{ url('task_edit', {id: task.id}) }}" class="btn btn-secondary"
-                                       title="{{ 'action.edit'|trans }}">
-                                        {{ 'action.edit'|trans }}
-                                    </a>
-                                {%endif %}
-
-                                {% if is_granted('DELETE', task) %}
-                                    <a href="{{ url('task_delete', {id: task.id}) }}" class="btn btn-danger"
-                                       title="{{ 'action.delete'|trans }}">
-                                        {{ 'action.delete'|trans }}
-                                    </a>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -57,13 +52,28 @@
             </div>
         </main>
 
+
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
 
     {% else %}
-        <p>
-            {{ 'message.empty_list'|trans }}
-        </p>
+        <main class="container my-5">
+            <p>
+                {{ 'message.empty_list'|trans }}
+            </p>
+            <div class="row mb-4">
+            <!-- Add Post Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 d-flex flex-column align-items-center text-center">
+                        <div class="card-body flex-grow-1">
+                            <a href="{{ url('task_create') }}" class="btn btn-primary">
+                                {{ 'action.add_post'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     {% endif %}
 {% endblock %}

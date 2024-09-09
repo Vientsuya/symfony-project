@@ -5,32 +5,92 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.task_details'|trans({'%id%': task.id|default('')}) }}</h1>
-    {% if task is defined and task|length %}
-        <dl class="dl-horizontal">
-            <dt>{{ 'label.id'|trans }}</dt>
-            <dd>{{ task.id }}</dd>
-            <dt>{{ 'label.created_at'|trans }}</dt>
-            <dd>{{ task.createdAt|format_date('long') }}</dd>
-            <dt>{{ 'label.updated_at'|trans }}</dt>
-            <dd>{{ task.updatedAt|format_date('long') }}</dd>
-            <dt>{{ 'label.title'|trans }}</dt>
-            <dd>{{  task.title }}</dd>
-            <dt>{{ 'label.category'|trans }}</dt>
-            <dd>{{  task.category.title }}</dd>
-        </dl>
-        <p>
-            <a href="{{ url('task_index') }}" title="{{ 'action.back_to_list'|trans }}">
-                {{ 'action.back_to_list'|trans }}
-            </a>
-        </p>
 
-        {% if is_granted('EDIT', task) %}
-            <a href="{{ url('thumbnail_create', {taskId: task.id}) }}" title="{{ 'action.add_thumbnail'|trans
-            }}">
-                {{ 'action.add_thumbnail'|trans }}
-            </a>
-        {% endif %}
+{% if task is defined and task|length %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <!-- Blog Post Card -->
+                <div class="card">
+                    <div class="card-header bg-white text-center">
+                        <h2 class="card-title">{{ task.title }}</h2>
+                        {% if task.thumbnail %}
+                            <img src="{{ asset('uploads/thumbnails/' ~ task.thumbnail.filename) }}" alt="Thumbnail"
+                                 class="img-fluid">
+                        {% else %}
+                            <p class="text-center">{{ 'label.no_thumbnail_available'|trans }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="card-body text-center">
+                            {% if is_granted('EDIT', task) %}
+                                <a href="{{ url('task_edit', {id: task.id}) }}" class="btn btn-secondary"
+                                   title="{{ 'action.edit'|trans }}">
+                                    {{ 'action.edit'|trans }}
+                                </a>
+                            {%endif %}
+
+                            {% if is_granted('DELETE', task) %}
+                                <a href="{{ url('task_delete', {id: task.id}) }}" class="btn btn-danger"
+                                   title="{{ 'action.delete'|trans }}">
+                                    {{ 'action.delete'|trans }}
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        <p class="text-muted">Kategoria: {{ task.category.title }}</p>
+                        <p class="card-text">Utworzono: <span class="badge bg-info">{{ task.createdAt|format_date
+                                    ('long') }}</span></p>
+                        <p class="card-text">Zaktualizowano: <span class="badge bg-success">{{ task
+                                .updatedAt|format_date
+                                    ('long')
+                                }}</span></p>
+                        <div class="my-4">
+                            TU będzie kontent posta
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="mt-5">
+                    <h3>Komentarze</h3>
+                    {#
+                    {% if comments is not empty %}
+                        <ul class="list-group">
+                            {% for comment in comments %}
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="fw-bold">{{ comment.author }}</p>
+                                        <p class="text-muted">{{ comment.date|date('d F Y H:i') }}</p>
+                                    </div>
+                                    <p>{{ comment.content }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">Brak komentarzy.</p>
+                    {% endif %}
+                    #}
+                    <!-- Comment Form -->
+                    <div class="mt-4">
+                        <h4>Dodaj Komentarz</h4>
+                   {#
+                   <form action="{{ path('add_comment', { 'postId': post.id }) }}" method="post">
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Imię</label>
+                            <input type="text" class="form-control" id="author" name="author" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Treść Komentarza</label>
+                            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Dodaj Komentarz</button>
+                    </form>
+                   #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% else %}
         <p>
