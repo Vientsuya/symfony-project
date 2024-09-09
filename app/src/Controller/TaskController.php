@@ -10,6 +10,7 @@ use App\Entity\Thumbnail;
 use App\Entity\User;
 use App\Form\Type\TaskType;
 use App\Repository\UserRepository;
+use App\Service\CommentServiceInterface;
 use App\Service\TaskServiceInterface;
 use App\Service\ThumbnailServiceInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -33,8 +34,13 @@ class TaskController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(private readonly TaskServiceInterface $taskService, private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly UserRepository $userRepository)
-    {
+    public function __construct(
+        private readonly TaskServiceInterface $taskService,
+        private readonly CommentServiceInterface $commentService,
+        private readonly ThumbnailServiceInterface $thumbnailService,
+        private readonly TranslatorInterface $translator,
+        private readonly UserRepository $userRepository
+    ) {
     }
 
     /**
@@ -86,9 +92,11 @@ class TaskController extends AbstractController
         methods: 'GET'
     )]
     #[IsGranted('VIEW', subject: 'task')]
-    public function show(Task $task): Response
+    public function show(int $id, Task $task, #[MapQueryParameter] int $page = 1): Response
     {
-        return $this->render('task/show.html.twig', ['task' => $task]);
+        $paginatedComments = $this->commentService->getTaskComments($id, $page);
+
+        return $this->render('task/show.html.twig', ['task' => $task, 'pagination' => $paginatedComments]);
     }
 
     /**
@@ -163,6 +171,21 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Check if a new file has been uploaded
+            /** @var UploadedFile|null $file */
+            $file = $form->get('file')->getData();
+
+            if ($file) {
+                // Create a new Thumbnail entity if necessary
+                $thumbnail = $task->getThumbnail() ?? new Thumbnail();
+
+                // Handle the file upload with your ThumbnailService
+                $this->thumbnailService->create($file, $thumbnail, $task);
+
+                // Set the new thumbnail
+                $task->setThumbnail($thumbnail);
+            }
+
             $this->taskService->save($task);
 
             $this->addFlash(

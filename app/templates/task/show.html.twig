@@ -50,17 +50,16 @@
                     </div>
                 </div>
 
-                <!-- Comments Section -->
+                <!-- Comment Section -->
                 <div class="mt-5">
                     <h3>Komentarze</h3>
-                    {#
-                    {% if comments is not empty %}
+                    {% if pagination.items is not empty %}
                         <ul class="list-group">
-                            {% for comment in comments %}
+                            {% for comment in pagination.items %}
                                 <li class="list-group-item">
                                     <div class="d-flex justify-content-between">
-                                        <p class="fw-bold">{{ comment.author }}</p>
-                                        <p class="text-muted">{{ comment.date|date('d F Y H:i') }}</p>
+                                        <p class="fw-bold">{{ comment.author.email }}</p>
+                                        <p class="text-muted">{{ comment.createdAt|format_date('long' )}}</p>
                                     </div>
                                     <p>{{ comment.content }}</p>
                                 </li>
@@ -69,7 +68,7 @@
                     {% else %}
                         <p class="text-muted">Brak komentarzy.</p>
                     {% endif %}
-                    #}
+
                     <!-- Comment Form -->
                     <div class="mt-4">
                         <h4>Dodaj Komentarz</h4>
