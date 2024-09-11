@@ -52,6 +52,12 @@
 
                 <!-- Comment Section -->
                 <div class="mt-5">
+                    {% if is_granted('CREATE_COMMENT', task) %}
+                        <a href="{{ url('comment_create', {taskId: task.id}) }}" class="btn btn-secondary"
+                           title="{{ 'action.create_comment'|trans }}">
+                            {{ 'action.create_comment'|trans }}
+                        </a>
+                    {%endif %}
                     <h3>Komentarze</h3>
                     {% if pagination.items is not empty %}
                         <ul class="list-group">
@@ -62,34 +68,26 @@
                                         <p class="text-muted">{{ comment.createdAt|format_date('long' )}}</p>
                                     </div>
                                     <p>{{ comment.content }}</p>
+
+                                    {% if is_granted('DELETE', comment) %}
+                                        <div class="d-flex justify-content-end">
+                                            <a href="{{ path('comment_delete', {taskId: task.id}) }}"
+                                                class="btn btn-danger btn-sm"
+                                                title="{{ 'action.delete_comment' }}">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
                                 </li>
                             {% endfor %}
                         </ul>
                     {% else %}
                         <p class="text-muted">Brak komentarzy.</p>
                     {% endif %}
-
-                    <!-- Comment Form -->
-                    <div class="mt-4">
-                        <h4>Dodaj Komentarz</h4>
-                   {#
-                   <form action="{{ path('add_comment', { 'postId': post.id }) }}" method="post">
-                        <div class="mb-3">
-                            <label for="author" class="form-label">Imię</label>
-                            <input type="text" class="form-control" id="author" name="author" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="content" class="form-label">Treść Komentarza</label>
-                            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Dodaj Komentarz</button>
-                    </form>
-                   #}
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     {% else %}
         <p>

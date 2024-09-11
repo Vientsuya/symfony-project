@@ -1,27 +1,21 @@
 <?php
+
 /**
- * Task voter.
+ * Comment voter.
  */
 
 namespace App\Security\Voter;
 
-use App\Entity\Task;
+use App\Entity\Comment;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class TaskVoter.
+ * Class CommentVoter.
  */
-class TaskVoter extends Voter
+class CommentVoter extends Voter
 {
-    /**
-     * Edit permission.
-     *
-     * @const string
-     */
-    private const EDIT = 'EDIT';
-
     /**
      * View permission.
      *
@@ -37,13 +31,6 @@ class TaskVoter extends Voter
     private const DELETE = 'DELETE';
 
     /**
-     * Create comment permission.
-     *
-     * @const string
-     */
-    private const CREATE_COMMENT = 'CREATE_COMMENT';
-
-    /**
      * Determines if the attribute and subject are supported by this voter.
      *
      * @param string $attribute An attribute
@@ -53,8 +40,8 @@ class TaskVoter extends Voter
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::CREATE_COMMENT])
-            && $subject instanceof Task;
+        return in_array($attribute, [self::VIEW, self::DELETE])
+            && $subject instanceof Comment;
     }
 
     /**
@@ -73,7 +60,7 @@ class TaskVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-        if (!$subject instanceof Task) {
+        if (!$subject instanceof Comment) {
             return false;
         }
 
@@ -83,35 +70,21 @@ class TaskVoter extends Voter
         }
 
         return match ($attribute) {
-            self::EDIT => $this->canEdit($subject, $user),
             self::VIEW => $this->canView($subject, $user),
             self::DELETE => $this->canDelete($subject, $user),
-            self::CREATE_COMMENT => $this->canCreateComment($token),
             default => false,
         };
     }
 
     /**
-     * Checks if user can edit task.
+     * Checks if user can view comments.
      *
-     * @param Task          $task Task entity
-     * @param UserInterface $user User *
-     * @return bool Result
-     */
-    private function canEdit(Task $task, UserInterface $user): bool
-    {
-        return $task->getAuthor() === $user;
-    }
-
-    /**
-     * Checks if user can view task.
-     *
-     * @param Task          $task Task entity
-     * @param UserInterface $user User
+     * @param Comment       $comment Comment entity
+     * @param UserInterface $user    User
      *
      * @return bool Result
      */
-    private function canView(Task $task, UserInterface $user): bool
+    private function canView(Comment $comment, UserInterface $user): bool
     {
         return true;
     }
@@ -119,28 +92,13 @@ class TaskVoter extends Voter
     /**
      * Checks if user can delete task.
      *
-     * @param Task          $task Task entity
-     * @param UserInterface $user User
+     * @param Comment       $comment Comment entity
+     * @param UserInterface $user    User
      *
      * @return bool Result
      */
-    private function canDelete(Task $task, UserInterface $user): bool
+    private function canDelete(Comment $comment, UserInterface $user): bool
     {
-        return $task->getAuthor() === $user;
-    }
-
-    /**
-     * Checks if user can create comment.
-     *
-     * @param TokenInterface $token Token interface
-     *
-     * @return bool Result
-     */
-    private function canCreateComment(TokenInterface $token): bool
-    {
-        if ($token->getUser() instanceof UserInterface) {
-            return true;
-        }
-        return false;
+        return $comment->getAuthor() === $user;
     }
 }

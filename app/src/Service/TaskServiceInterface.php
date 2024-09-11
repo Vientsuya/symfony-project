@@ -52,4 +52,6 @@ interface TaskServiceInterface
      * @throws \InvalidArgumentException if the user with the given ID does not exist
      */
     public function getUserTasks(int $userId, int $page): PaginationInterface;
+
+    public function getTaskById(int $id): Task;
 }

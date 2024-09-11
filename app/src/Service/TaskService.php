@@ -5,8 +5,8 @@
 
 namespace App\Service;
 
-use App\Entity\Category;
 use App\Entity\Task;
+use App\Repository\CommentRepository;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Exception\ORMException;
@@ -36,7 +36,7 @@ class TaskService implements TaskServiceInterface
      * @param TaskRepository     $taskRepository Task repository
      * @param PaginatorInterface $paginator      Paginator
      */
-    public function __construct(private readonly TaskRepository $taskRepository, private readonly UserRepository $userRepository, private readonly PaginatorInterface $paginator)
+    public function __construct(private readonly TaskRepository $taskRepository, private readonly UserRepository $userRepository, private readonly CommentRepository $commentRepository, readonly PaginatorInterface $paginator)
     {
     }
 
@@ -63,6 +63,12 @@ class TaskService implements TaskServiceInterface
      */
     public function delete(Task $task): void
     {
+        $comments = $this->commentRepository->queryByTask($task)->getQuery()->getResult();
+
+        foreach ($comments as $comment) {
+            $this->commentRepository->delete($comment);
+        }
+
         $this->taskRepository->delete($task);
     }
 
@@ -101,5 +107,10 @@ class TaskService implements TaskServiceInterface
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );
+    }
+
+    public function getTaskById(int $id): Task
+    {
+        return $this->taskRepository->find($id);
     }
 }
