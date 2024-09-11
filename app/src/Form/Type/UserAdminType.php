@@ -25,20 +25,20 @@ class UserAdminType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'label.email',
                 'required' => true,
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Password',
+                'label' => 'label.password',
                 'mapped' => false,
                 'required' => false,
                 'attr' => ['autocomplete' => 'new-password'],
             ])
             ->add('roles', ChoiceType::class, [
-                'label' => 'Roles',
+                'label' => 'label.roles',
                 'choices' => [
-                    'Admin' => 'ROLE_ADMIN',
-                    'User' => 'ROLE_USER',
+                    'label.admin' => 'ROLE_ADMIN',
+                    'label.user' => 'ROLE_USER',
                 ],
                 'multiple' => true,  // Allows selecting multiple roles
                 'expanded' => true,  // Show checkboxes instead of a dropdown

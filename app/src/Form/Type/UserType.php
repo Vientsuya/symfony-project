@@ -24,11 +24,11 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'label.email',
                 'required' => true,
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Password',
+                'label' => 'label.password',
                 'mapped' => true,
                 'required' => true,
                 'attr' => ['autocomplete' => 'new-password'],

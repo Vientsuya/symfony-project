@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -17,13 +18,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'users')]
+#[UniqueEntity('email')]
 #[ORM\UniqueConstraint(name: 'email_idx', columns: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,8 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Email.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -50,8 +48,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Password.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]

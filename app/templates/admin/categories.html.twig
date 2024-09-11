@@ -8,7 +8,7 @@
     <div class="text-center">
         <h1>{{ 'title.category_list'|trans }}</h1>
         <a href="{{ url('category_create', {redirect: 'admin_categories'}) }}" class="btn btn-primary btn-lg">
-            {{ 'label.create'}}
+            {{ 'action.create'|trans }}
         </a>
     </div>
 {% if pagination is defined and pagination.items|length %}
@@ -36,9 +36,7 @@
                 <td>{{ category.title }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ url('show_task_list', {categoryName: category.title}) }}"
-                       title="{{
-                    'action
-                        .show'|trans }}">
+                       title="{{'action.show'|trans }}">
                         {{ 'action.show'|trans }}
                     </a>
 

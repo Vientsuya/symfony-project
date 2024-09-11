@@ -8,7 +8,7 @@
     <div class="text-center">
         <h1>{{ 'title.user_list'|trans }}</h1>
         <a href="{{ url('app_register', {redirect: 'admin_users'}) }}" class="btn btn-primary btn-lg">
-            {{ 'label.create'}}
+            {{ 'label.create'|trans }}
         </a>
     </div>
     {% if pagination is defined and pagination.items|length %}
@@ -23,7 +23,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'user.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.email'|trans, 'user.email') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.roles'|trans, 'user.roles') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'user.password'|trans, 'user.password') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.password'|trans, 'user.password') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>

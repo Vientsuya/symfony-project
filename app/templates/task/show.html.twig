@@ -45,7 +45,6 @@
                                     ('long')
                                 }}</span></p>
                         <div class="my-4">
-                            TU będzie kontent posta
                         </div>
                     </div>
                 </div>
@@ -53,10 +52,12 @@
                 <!-- Comment Section -->
                 <div class="mt-5">
                     {% if is_granted('CREATE_COMMENT', task) %}
-                        <a href="{{ url('comment_create', {taskId: task.id}) }}" class="btn btn-secondary"
-                           title="{{ 'action.create_comment'|trans }}">
-                            {{ 'action.create_comment'|trans }}
-                        </a>
+                        <div class="text-center">
+                            <a href="{{ url('comment_create', {taskId: task.id}) }}" class="btn btn-secondary"
+                               title="{{ 'action.create_comment'|trans }}">
+                                {{ 'action.create_comment'|trans }}
+                            </a>
+                        </div>
                     {%endif %}
                     <h3>Komentarze</h3>
                     {% if pagination.items is not empty %}
@@ -74,8 +75,8 @@
                                             <a href="{{ path('comment_delete', {taskId: task.id, id: comment.id})
                                             }}"
                                                 class="btn btn-danger btn-sm"
-                                                title="{{ 'action.delete_comment' }}">
-                                                Delete
+                                                title="{{ 'action.delete' }}">
+                                                {{ 'action.delete'|trans }}
                                             </a>
                                         </div>
                                     {% endif %}
@@ -84,7 +85,7 @@
                             {% endfor %}
                         </ul>
                     {% else %}
-                        <p class="text-muted">Brak komentarzy.</p>
+                        <p class="text-muted">{{ 'message.no_comments'|trans }}</p>
                     {% endif %}
                 </div>
             </div>

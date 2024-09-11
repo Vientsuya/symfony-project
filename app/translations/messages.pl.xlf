@@ -2,6 +2,10 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="label.admin_panel">
+                <source>label.admin_panel</source>
+                <target>Panel Administracyjny</target>
+            </trans-unit>
             <trans-unit id="label.actions">
                 <source>label.actions</source>
                 <target>Akcje</target>
@@ -26,6 +30,14 @@
                 <source>label.created_at</source>
                 <target>Utworzono</target>
             </trans-unit>
+            <trans-unit id="label.create">
+                <source>label.create</source>
+                <target>Utwórz</target>
+            </trans-unit>
+            <trans-unit id="label.admin">
+                <source>label.admin</source>
+                <target>Administrator</target>
+            </trans-unit>
             <trans-unit id="label.category">
                 <source>label.category</source>
                 <target>Kategoria</target>
@@ -37,6 +49,22 @@
             <trans-unit id="label.updated_at">
                 <source>label.updated_at</source>
                 <target>Zaktualizowano</target>
+            </trans-unit>
+            <trans-unit id="title.user_edit">
+                <source>title.user_edit</source>
+                <target>Edytuj użytkownika</target>
+            </trans-unit>
+            <trans-unit id="title.register">
+                <source>title.register</source>
+                <target>Zarejestruj nowe konto</target>
+            </trans-unit>
+            <trans-unit id="title.create_user">
+                <source>title.create_user</source>
+                <target>Stwórz użytkownika</target>
+            </trans-unit>
+            <trans-unit id="label.user">
+                <source>label.user</source>
+                <target>Użytkownik</target>
             </trans-unit>
             <trans-unit id="label.no_thumbnail_available">
                 <source>label.no_thumbnail_available</source>
@@ -54,9 +82,33 @@
                 <source>label.all_posts</source>
                 <target>Wszystkie posty</target>
             </trans-unit>
+            <trans-unit id="label.manage_tasks">
+                <source>label.manage_tasks</source>
+                <target>Zarządzaj postami</target>
+            </trans-unit>
+            <trans-unit id="label.email">
+                <source>label.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="label.roles">
+                <source>label.roles</source>
+                <target>Role</target>
+            </trans-unit>
+            <trans-unit id="label.manage_categories">
+                <source>label.manage_categories</source>
+                <target>Zarządzaj kategoriami</target>
+            </trans-unit>
+            <trans-unit id="label.manage_users">
+                <source>label.manage_users</source>
+                <target>Zarządzaj użytkownikami</target>
+            </trans-unit>
             <trans-unit id="label.my_posts">
                 <source>label.my_posts</source>
                 <target>Moje posty</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Hasło</target>
             </trans-unit>
             <trans-unit id="message.empty_list">
                 <source>message.empty_list</source>
@@ -74,9 +126,17 @@
                 <source>title.post_list</source>
                 <target>Lista postów</target>
             </trans-unit>
+            <trans-unit id="title.admin_dashboard">
+                <source>title.admin_dashboard</source>
+                <target>Panel Administracyjny</target>
+            </trans-unit>
             <trans-unit id="title.record_list">
                 <source>title.record_list</source>
                 <target>Lista rekordów</target>
+            </trans-unit>
+            <trans-unit id="title.task_edit">
+                <source>title.task_edit</source>
+                <target>Edycja posta</target>
             </trans-unit>
             <trans-unit id="title.record_view">
                 <source>title.record_view</source>
@@ -86,6 +146,18 @@
                 <source>title.task_list</source>
                 <target>Lista zadań</target>
             </trans-unit>
+            <trans-unit id="title.task_delete">
+                <source>title.task_delete</source>
+                <target>Usuń post</target>
+            </trans-unit>
+            <trans-unit id="title.user_list">
+                <source>title.user_list</source>
+                <target>Lista użytkowników</target>
+            </trans-unit>
+            <trans-unit id="title.task_create">
+                <source>title.task_create</source>
+                <target>Utwórz post</target>
+            </trans-unit>
             <trans-unit id="title.task_details">
                 <source>title.task_details</source>
                 <target>Szczegóły zadania</target>
@@ -94,6 +166,30 @@
                 <source>title.thumbnail_create</source>
                 <target>Ustaw miniaturke</target>
             </trans-unit>
+            <trans-unit id="title.comment_create">
+                <source>title.comment_create</source>
+                <target>Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="title.category_list">
+                <source>title.category_list</source>
+                <target>Lista kategorii</target>
+            </trans-unit>
+            <trans-unit id="title.category_edit">
+                <source>title.category_edit</source>
+                <target>Edytuj kategorie</target>
+            </trans-unit>
+            <trans-unit id="title.category_delete">
+                <source>title.category_delete</source>
+                <target>Usuń kategorie</target>
+            </trans-unit>
+            <trans-unit id="title.category_create">
+                <source>title.category_create</source>
+                <target>Utwórz kategorie</target>
+            </trans-unit>
+            <trans-unit id="title.comment_delete">
+                <source>title.comment_delete</source>
+                <target>Usuń komentarz</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Pokaż</target>
@@ -101,6 +197,10 @@
             <trans-unit id="action.add_post">
                 <source>action.add_post</source>
                 <target>Dodaj post</target>
+            </trans-unit>
+            <trans-unit id="action.create_comment">
+                <source>action.create_comment</source>
+                <target>Dodaj komentarz</target>
             </trans-unit>
             <trans-unit id="action.back_to_list">
                 <source>action.back_to_list</source>
@@ -137,6 +237,22 @@
             <trans-unit id="message.category_contains_posts">
                 <source>message.category_contains_posts</source>
                 <target>Kategoria ma przypisane posty</target>
+            </trans-unit>
+            <trans-unit id="message.deleted_successfully">
+                <source>message.deleted_successfully</source>
+                <target>Pomyślnie usunięto</target>
+            </trans-unit>
+            <trans-unit id="message.no_comments">
+                <source>message.no_comments</source>
+                <target>Brak komentarzy</target>
+            </trans-unit>
+            <trans-unit id="message.show">
+                <source>message.show</source>
+                <target>Pokaż</target>
+            </trans-unit>
+            <trans-unit id="message.form_error">
+                <source>message.form_error</source>
+                <target>W formularzu wystąpił błąd</target>
             </trans-unit>
         </body>
     </file>
