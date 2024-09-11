@@ -28,7 +28,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * Class TaskController.
  */
-#[Route('/task')]
+#[Route('/')]
 class TaskController extends AbstractController
 {
     /**
