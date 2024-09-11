@@ -1,6 +1,6 @@
 <?php
 /**
- * Task repository
+ * Task repository.
  */
 
 namespace App\Repository;
@@ -63,7 +63,6 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Query comments by task.
      *
-     * @param Task $task
      * @return QueryBuilder Query builder
      */
     public function queryByTask(Task $task): QueryBuilder
@@ -72,6 +71,23 @@ class CommentRepository extends ServiceEntityRepository
 
         $queryBuilder->andWhere('comment.task = :task')
             ->setParameter('task', $task);
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Query comments by author.
+     *
+     * @param User $author Author of the comments we want to query
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryByAuthor(User $author): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+
+        $queryBuilder->andWhere('comment.author = :author')
+            ->setParameter('author', $author);
 
         return $queryBuilder;
     }

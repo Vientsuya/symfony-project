@@ -32,6 +32,8 @@ class SecurityController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
+        $redirectRoute = $request->query->get('redirect', 'app_login');
+
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -40,8 +42,6 @@ class SecurityController extends AbstractController
             $email = $form->get('email')->getData();
             $plaintextPassword = $form->get('password')->getData();
             $role = 'ROLE_USER';
-
-            echo $plaintextPassword;
 
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute($redirectRoute);
         }
 
         return $this->render('security/register.html.twig', [

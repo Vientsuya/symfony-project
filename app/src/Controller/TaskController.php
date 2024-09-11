@@ -160,12 +160,14 @@ class TaskController extends AbstractController
     #[Route('/{id}/edit', name: 'task_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, Task $task): Response
     {
+        $redirectRoute = $request->query->get('redirect', 'task_index');
+
         $form = $this->createForm(
             TaskType::class,
             $task,
             [
                 'method' => 'PUT',
-                'action' => $this->generateUrl('task_edit', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('task_edit', ['id' => $task->getId(), 'redirect' => $redirectRoute]),
             ]
         );
         $form->handleRequest($request);
@@ -193,7 +195,7 @@ class TaskController extends AbstractController
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute($redirectRoute);
         }
 
         return $this->render(
@@ -219,14 +221,17 @@ class TaskController extends AbstractController
     #[Route('/{id}/delete', name: 'task_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Task $task): Response
     {
+        $redirectRoute = $request->query->get('redirect', 'task_index');
+
         $form = $this->createForm(
             FormType::class,
             $task,
             [
                 'method' => 'DELETE',
-                'action' => $this->generateUrl('task_delete', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('task_delete', ['id' => $task->getId(), 'redirect' => $redirectRoute]),
             ]
         );
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -237,7 +242,7 @@ class TaskController extends AbstractController
                 $this->translator->trans('message.deleted_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute($redirectRoute);
         }
 
         return $this->render(

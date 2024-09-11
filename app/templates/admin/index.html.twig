@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'category.category_list'|trans }}
+{% endblock %}
+
+{% block body %}
+        <h1 class="text-center mt-2">Admin Dashboard</h1>
+
+        <div class="container p-4 text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{{ path('admin_tasks') }}" class="btn btn-primary btn-lg">
+                        {{ 'label.manage_tasks'}}
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('admin_categories') }}" class="btn btn-primary btn-lg">
+                        {{ 'label.manage_categories'}}
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('admin_users') }}" class="btn btn-primary btn-lg">
+                        {{ 'label.manage_users'}}
+                    </a>
+                </div>
+            </div>
+        </div>
+{% endblock %}

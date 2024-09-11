@@ -71,8 +71,16 @@ class CategoryController extends AbstractController
     )]
     public function create(Request $request): Response
     {
+        $redirectRoute = $request->query->get('redirect', 'category_index');
+
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(
+            CategoryType::class,
+            $category,
+            [
+                'action' => $this->generateUrl('category_create', ['redirect' => $redirectRoute]),
+            ]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -83,7 +91,7 @@ class CategoryController extends AbstractController
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('category_index');
+            return $this->redirectToRoute($redirectRoute);
         }
 
         return $this->render(
@@ -103,12 +111,14 @@ class CategoryController extends AbstractController
     #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, Category $category): Response
     {
+        $redirectRoute = $request->query->get('redirect', 'category_index');
+
         $form = $this->createForm(
             CategoryType::class,
             $category,
             [
                 'method' => 'PUT',
-                'action' => $this->generateUrl('category_edit', ['id' => $category->getId()]),
+                'action' => $this->generateUrl('category_edit', ['id' => $category->getId(), 'redirect' => $redirectRoute]),
             ]
         );
         $form->handleRequest($request);
@@ -121,7 +131,7 @@ class CategoryController extends AbstractController
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('category_index');
+            return $this->redirectToRoute($redirectRoute);
         }
 
         return $this->render(
@@ -144,13 +154,15 @@ class CategoryController extends AbstractController
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Category $category): Response
     {
+        $redirectRoute = $request->query->get('redirect', 'category_index');
+
         if (!$this->categoryService->canBeDeleted($category)) {
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.category_contains_posts')
             );
 
-            return $this->redirectToRoute('category_index');
+            return $this->redirectToRoute($redirectRoute);
         }
 
         $form = $this->createForm(
@@ -158,7 +170,7 @@ class CategoryController extends AbstractController
             $category,
             [
                 'method' => 'DELETE',
-                'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),
+                'action' => $this->generateUrl('category_delete', ['id' => $category->getId(), 'redirect' => $redirectRoute]),
             ]
         );
         $form->handleRequest($request);
@@ -171,7 +183,7 @@ class CategoryController extends AbstractController
                 $this->translator->trans('message.deleted_successfully')
             );
 
-            return $this->redirectToRoute('category_index');
+            return $this->redirectToRoute($redirectRoute);
         }
 
         return $this->render(
