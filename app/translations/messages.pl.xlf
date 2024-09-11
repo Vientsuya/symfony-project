@@ -182,6 +182,10 @@
                 <source>title.category_delete</source>
                 <target>Usuń kategorie</target>
             </trans-unit>
+            <trans-unit id="title.sign_in">
+                <source>title.sign_in</source>
+                <target>Logowanie</target>
+            </trans-unit>
             <trans-unit id="title.category_create">
                 <source>title.category_create</source>
                 <target>Utwórz kategorie</target>
@@ -222,6 +226,10 @@
                 <source>action.add_thumbnail</source>
                 <target>Dodaj miniaturke</target>
             </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
             <trans-unit id="action.logout">
                 <source>action.logout</source>
                 <target>Wyloguj się</target>
@@ -233,6 +241,14 @@
             <trans-unit id="category.category_list">
                 <source>category.category_list</source>
                 <target>Lista kategorii</target>
+            </trans-unit>
+            <trans-unit id="button.sign_in">
+                <source>button.sign_in</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
+            <trans-unit id="button.register">
+                <source>button.register</source>
+                <target>Zarejestruj się</target>
             </trans-unit>
             <trans-unit id="message.category_contains_posts">
                 <source>message.category_contains_posts</source>
@@ -253,6 +269,10 @@
             <trans-unit id="message.form_error">
                 <source>message.form_error</source>
                 <target>W formularzu wystąpił błąd</target>
+            </trans-unit>
+            <trans-unit id="message.footer">
+                <source>message.footer</source>
+                <target>2024 Mój Blog. Wszelkie prawa zastrzeżone.</target>
             </trans-unit>
         </body>
     </file>

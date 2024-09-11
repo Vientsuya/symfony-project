@@ -178,6 +178,10 @@
                 <source>title.category_edit</source>
                 <target>Edit Category</target>
             </trans-unit>
+            <trans-unit id="title.sign_in">
+                <source>title.sign_in</source>
+                <target>Please sign in</target>
+            </trans-unit>
             <trans-unit id="title.category_delete">
                 <source>title.category_delete</source>
                 <target>Delete Category</target>
@@ -189,6 +193,14 @@
             <trans-unit id="title.comment_delete">
                 <source>title.comment_delete</source>
                 <target>Delete Comment</target>
+            </trans-unit>
+            <trans-unit id="button.sign_in">
+                <source>button.sign_in</source>
+                <target>Sign in</target>
+            </trans-unit>
+            <trans-unit id="button.register">
+                <source>button.register</source>
+                <target>Register</target>
             </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
@@ -217,6 +229,10 @@
             <trans-unit id="action.create">
                 <source>action.create</source>
                 <target>Create</target>
+            </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Login</target>
             </trans-unit>
             <trans-unit id="action.add_thumbnail">
                 <source>action.add_thumbnail</source>
@@ -253,6 +269,10 @@
             <trans-unit id="message.form_error">
                 <source>message.form_error</source>
                 <target>There was an error in the form</target>
+            </trans-unit>
+            <trans-unit id="message.footer">
+                <source>message.footer</source>
+                <target>2024 My Blog. All rights reserved.</target>
             </trans-unit>
         </body>
     </file>
