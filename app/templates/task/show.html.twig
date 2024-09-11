@@ -71,7 +71,8 @@
 
                                     {% if is_granted('DELETE', comment) %}
                                         <div class="d-flex justify-content-end">
-                                            <a href="{{ path('comment_delete', {taskId: task.id}) }}"
+                                            <a href="{{ path('comment_delete', {taskId: task.id, id: comment.id})
+                                            }}"
                                                 class="btn btn-danger btn-sm"
                                                 title="{{ 'action.delete_comment' }}">
                                                 Delete

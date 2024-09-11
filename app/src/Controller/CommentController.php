@@ -6,6 +6,8 @@ use App\Entity\Comment;
 use App\Form\Type\CommentType;
 use App\Service\CommentServiceInterface;
 use App\Service\TaskService;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,16 +76,19 @@ class CommentController extends AbstractController
      * @param Comment $comment Comment entity
      *
      * @return Response HTTP response
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    #[Route('/{taskId}/delete', name: 'comment_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    public function delete(int $taskId, Request $request, Comment $comment): Response
+    #[Route('/{id}/delete/{taskId}', name: 'comment_delete', requirements: ['taskId' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    public function delete(int $taskId, int $id, Request $request, Comment $comment): Response
     {
         $form = $this->createForm(
             FormType::class,
             $comment,
             [
                 'method' => 'DELETE',
-                'action' => $this->generateUrl('comment_delete', ['id' => $comment->getId()]),
+                'action' => $this->generateUrl('comment_delete', ['taskId' => $taskId, 'id' => $id]),
             ]
         );
         $form->handleRequest($request);
