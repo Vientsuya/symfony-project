@@ -49,7 +49,7 @@ class ThumbnailService implements ThumbnailServiceInterface
     }
 
     /**
-     * Create avatar.
+     * Create thumbnail.
      *
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Thumbnail    $thumbnail    Thumbnail entity
@@ -59,7 +59,6 @@ class ThumbnailService implements ThumbnailServiceInterface
     {
         $thumbnailFilename = $this->fileUploadService->upload($uploadedFile);
 
-        $thumbnail->setTask($task);
         $thumbnail->setFilename($thumbnailFilename);
         $this->thumbnailRepository->save($thumbnail);
     }

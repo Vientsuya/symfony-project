@@ -27,14 +27,6 @@ class Thumbnail
     private ?int $id = null;
 
     /**
-     * Task.
-     */
-    #[ORM\OneToOne(inversedBy: 'thumbnail', targetEntity: Task::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\Type(Task::class)]
-    private ?Task $task = null;
-
-    /**
      * Filename.
      */
     #[ORM\Column(name: 'fileName', type: 'string', length: 191)]
@@ -49,30 +41,6 @@ class Thumbnail
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * Getter for task.
-     *
-     * @return Task|null Task
-     */
-    public function getTask(): ?Task
-    {
-        return $this->task;
-    }
-
-    /**
-     * Setter for task.
-     *
-     * @param Task $task Task
-     *
-     * @return Thumbnail
-     */
-    public function setTask(Task $task): static
-    {
-        $this->task = $task;
-
-        return $this;
     }
 
     /**

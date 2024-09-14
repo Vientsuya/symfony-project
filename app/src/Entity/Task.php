@@ -55,7 +55,7 @@ class Task
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Category $category = null;
 
-    #[ORM\OneToOne(mappedBy: 'task', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Thumbnail::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
     private ?Thumbnail $thumbnail = null;
 
     /**
@@ -63,7 +63,7 @@ class Task
      *
      * @var User|null
      */
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     #[Assert\NotBlank]
     #[Assert\Type(User::class)]
@@ -158,11 +158,6 @@ class Task
 
     public function setThumbnail(Thumbnail $thumbnail): static
     {
-        // set the owning side of the relation if necessary
-        if ($thumbnail->getTask() !== $this) {
-            $thumbnail->setTask($this);
-        }
-
         $this->thumbnail = $thumbnail;
 
         return $this;

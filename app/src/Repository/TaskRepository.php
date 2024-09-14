@@ -61,16 +61,18 @@ class TaskRepository extends ServiceEntityRepository
     {
         return $this->getOrCreateQueryBuilder()
         ->select('task', 'category')
-        ->join('task.category', 'category')
+            ->leftJoin('task.thumbnail', 'thumbnail')
+            ->join('task.category', 'category')
         ->orderBy('task.updatedAt', 'DESC');
     }
 
     public function queryByCategory(string $category): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->leftJoin('task.category', 'c')
-            ->andWhere('c.title = :categoryTitle')
-            ->setParameter('categoryTitle', $category)
+            ->select('task', 'category', 'thumbnail', 'author')
+            ->leftJoin('task.category', 'category')
+            ->leftJoin('task.thumbnail', 'thumbnail')
+            ->leftJoin('task.author', 'author')
             ->orderBy('task.updatedAt', 'DESC');
     }
 
