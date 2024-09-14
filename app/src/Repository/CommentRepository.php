@@ -16,6 +16,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class CommentRepository.
+ *
  * @extends ServiceEntityRepository<Comment>
  */
 class CommentRepository extends ServiceEntityRepository
@@ -31,21 +33,14 @@ class CommentRepository extends ServiceEntityRepository
      */
     public const PAGINATOR_ITEMS_PER_PAGE = 12;
 
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('comment');
     }
 
     /**
@@ -62,6 +57,8 @@ class CommentRepository extends ServiceEntityRepository
 
     /**
      * Query comments by task.
+     *
+     * @param Task $task Task
      *
      * @return QueryBuilder Query builder
      */
@@ -120,5 +117,17 @@ class CommentRepository extends ServiceEntityRepository
         assert($this->_em instanceof EntityManager);
         $this->_em->remove($comment);
         $this->_em->flush();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('comment');
     }
 }

@@ -1,4 +1,7 @@
 <?php
+/*
+ * User repository.
+ */
 
 namespace App\Repository;
 
@@ -14,10 +17,17 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
+ * UserRepository Class.
+ *
  * @extends ServiceEntityRepository<User>
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
@@ -25,6 +35,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param PasswordAuthenticatedUserInterface $user              User
+     * @param string                             $newHashedPassword New hashed password
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -39,6 +52,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Get a user by ID.
+     *
+     * @param int $id Id
+     *
+     * @return User|null User
      */
     public function getUserById(int $id): ?User
     {
@@ -55,18 +72,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->getOrCreateQueryBuilder()
             ->select('user')
             ->orderBy('user.id', 'DESC');
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('user');
     }
 
     /**
@@ -97,6 +102,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         assert($this->_em instanceof EntityManager);
         $this->_em->remove($user);
         $this->_em->flush();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('user');
     }
 
     //    /**

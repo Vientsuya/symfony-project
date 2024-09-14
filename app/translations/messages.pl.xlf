@@ -194,6 +194,10 @@
                 <source>title.comment_delete</source>
                 <target>Usuń komentarz</target>
             </trans-unit>
+            <trans-unit id="title.user_delete">
+                <source>title.user_delete</source>
+                <target>Usuń użytkownika</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Pokaż</target>

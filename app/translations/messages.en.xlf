@@ -194,6 +194,10 @@
                 <source>title.comment_delete</source>
                 <target>Delete Comment</target>
             </trans-unit>
+            <trans-unit id="title.user_delete">
+                <source>title.user_delete</source>
+                <target>Delete user</target>
+            </trans-unit>
             <trans-unit id="button.sign_in">
                 <source>button.sign_in</source>
                 <target>Sign in</target>

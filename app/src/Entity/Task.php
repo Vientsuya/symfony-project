@@ -34,7 +34,7 @@ class Task
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?\DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
@@ -43,7 +43,7 @@ class Task
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?\DateTimeImmutable $updatedAt;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * Title.
@@ -60,14 +60,12 @@ class Task
 
     /**
      * Author.
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     #[Assert\NotBlank]
     #[Assert\Type(User::class)]
-    private ?User $author;
+    private ?User $author = null;
 
     /**
      * Getter for Id.
@@ -139,11 +137,23 @@ class Task
         $this->title = $title;
     }
 
+    /**
+     * Getter for category.
+     *
+     * @return Category|null Category
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * Setter for category.
+     *
+     * @param Category|null $category Category
+     *
+     * @return $this
+     */
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
@@ -151,11 +161,23 @@ class Task
         return $this;
     }
 
+    /**
+     * Getter for thumbnail.
+     *
+     * @return Thumbnail|null Thumbnail
+     */
     public function getThumbnail(): ?Thumbnail
     {
         return $this->thumbnail;
     }
 
+    /**
+     * Setter for thumbnail.
+     *
+     * @param Thumbnail $thumbnail Thumbnail
+     *
+     * @return $this
+     */
     public function setThumbnail(Thumbnail $thumbnail): static
     {
         $this->thumbnail = $thumbnail;
@@ -163,11 +185,23 @@ class Task
         return $this;
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return User|null User
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * Setter for author.
+     *
+     * @param User|null $author Author
+     *
+     * @return $this
+     */
     public function setAuthor(?User $author): static
     {
         $this->author = $author;

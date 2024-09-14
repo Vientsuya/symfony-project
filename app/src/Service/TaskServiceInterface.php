@@ -53,5 +53,10 @@ interface TaskServiceInterface
      */
     public function getUserTasks(int $userId, int $page): PaginationInterface;
 
+    /**
+     * Get tasks given an id.
+     *
+     * @param int $id Id
+     */
     public function getTaskById(int $id): Task;
 }

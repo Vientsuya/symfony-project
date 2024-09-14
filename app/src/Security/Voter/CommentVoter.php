@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Comment voter.
  */

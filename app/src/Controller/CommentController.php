@@ -1,4 +1,7 @@
 <?php
+/**
+ * Comment Controller.
+ */
 
 namespace App\Controller;
 
@@ -23,6 +26,10 @@ class CommentController extends AbstractController
 {
     /**
      * Constructor.
+     *
+     * @param CommentServiceInterface $commentService CommentService
+     * @param TaskService             $taskService    Task Service
+     * @param TranslatorInterface     $translator     Translator
      */
     public function __construct(private readonly CommentServiceInterface $commentService, readonly TaskService $taskService, private readonly TranslatorInterface $translator)
     {
@@ -31,6 +38,7 @@ class CommentController extends AbstractController
     /**
      * Create action.
      *
+     * @param int     $taskId  Id of a task
      * @param Request $request HTTP request
      *
      * @return Response HTTP response
@@ -72,6 +80,8 @@ class CommentController extends AbstractController
     /**
      * Delete action.
      *
+     * @param int     $taskId  Task id
+     * @param int     $id      Id
      * @param Request $request HTTP request
      * @param Comment $comment Comment entity
      *

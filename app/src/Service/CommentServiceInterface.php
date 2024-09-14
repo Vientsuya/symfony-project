@@ -13,7 +13,8 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 /**
  * Interface CommentServiceInterface.
  */
-interface CommentServiceInterface {
+interface CommentServiceInterface
+{
     /**
      * Get paginated list.
      *

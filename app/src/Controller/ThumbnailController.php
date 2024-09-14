@@ -22,23 +22,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/thumbnail')]
 class ThumbnailController extends AbstractController
 {
-    private TaskRepository $taskRepository;
-
     /**
      * Constructor.
      *
      * @param ThumbnailServiceInterface $thumbnailService Thumbnail service
      * @param TranslatorInterface       $translator       Translator
+     * @param TaskRepository            $taskRepository   TaskRepository
      */
-    public function __construct(private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, TaskRepository $taskRepository)
+    public function __construct(private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly TaskRepository $taskRepository)
     {
-        $this->taskRepository = $taskRepository;
     }
 
     /**
      * Create action.
      *
      * @param Request $request HTTP request
+     * @param int     $taskId  Task id
      *
      * @return Response HTTP response
      */
@@ -95,6 +94,7 @@ class ThumbnailController extends AbstractController
      *
      * @param Request   $request   HTTP request
      * @param Thumbnail $thumbnail Thumbnail entity
+     * @param int       $taskId    Task id
      *
      * @return Response HTTP response
      */

@@ -1,4 +1,7 @@
 <?php
+/*
+ * Thumbnail repository.
+ */
 
 namespace App\Repository;
 
@@ -10,6 +13,8 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * ThumbnailRepository Class.
+ *
  * @extends ServiceEntityRepository<Thumbnail>
  */
 class ThumbnailRepository extends ServiceEntityRepository
@@ -24,11 +29,11 @@ class ThumbnailRepository extends ServiceEntityRepository
         parent::__construct($registry, Thumbnail::class);
     }
 
-
     /**
      * Save entity.
      *
-     * @param Thumbnail $thumbnail
+     * @param Thumbnail $thumbnail Thumbnail
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */

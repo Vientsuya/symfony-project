@@ -28,7 +28,6 @@ interface UserServiceInterface
      */
     public function delete(User $user): void;
 
-
     /**
      * Get paginated list.
      *

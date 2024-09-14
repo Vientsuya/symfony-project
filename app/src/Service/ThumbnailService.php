@@ -8,6 +8,8 @@ namespace App\Service;
 use App\Entity\Task;
 use App\Entity\Thumbnail;
 use App\Repository\ThumbnailRepository;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -34,6 +36,9 @@ class ThumbnailService implements ThumbnailServiceInterface
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Thumbnail    $thumbnail    Thumbnail entity
      * @param Task         $task         Task entity
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function update(UploadedFile $uploadedFile, Thumbnail $thumbnail, Task $task): void
     {
@@ -54,6 +59,9 @@ class ThumbnailService implements ThumbnailServiceInterface
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Thumbnail    $thumbnail    Thumbnail entity
      * @param Task         $task         Task entity
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function create(UploadedFile $uploadedFile, Thumbnail $thumbnail, Task $task): void
     {

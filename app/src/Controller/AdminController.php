@@ -7,7 +7,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\Type\UserAdminType;
-use App\Service\CategoryService;
+use App\Service\CategoryServiceInterface;
 use App\Service\TaskServiceInterface;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,13 +27,14 @@ class AdminController extends AbstractController
 {
     /**
      * Constructor.
+     *
+     * @param TaskServiceInterface     $taskService     Task Service
+     * @param CategoryServiceInterface $categoryService Category Service
+     * @param UserServiceInterface     $userService     User Service
+     * @param TranslatorInterface      $translator      Translator
      */
-    public function __construct(
-        private readonly TaskServiceInterface $taskService,
-        private readonly CategoryService $categoryService,
-        private readonly UserServiceInterface $userService,
-        private readonly TranslatorInterface $translator,
-    ) {
+    public function __construct(private readonly TaskServiceInterface $taskService, private readonly CategoryServiceInterface $categoryService, private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator)
+    {
     }
 
     /**
@@ -93,7 +94,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @param User $user User entity
+     * Edit user action.
+     *
+     * @param Request                     $request        HTTP request
+     * @param User                        $user           User entity
+     * @param UserPasswordHasherInterface $passwordHasher Password Hasher
      *
      * @return Response HTTP response
      */
@@ -149,7 +154,10 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @param User $user User entity
+     * Delete user action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */

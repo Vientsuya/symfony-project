@@ -1,10 +1,12 @@
 <?php
+/**
+ * Security Controller.
+ */
 
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\Type\UserType;
-use App\Service\CategoryServiceInterface;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,19 +17,25 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- *
+ *  Class SecurityController.
  */
 class SecurityController extends AbstractController
 {
-
+    /**
+     * @param UserServiceInterface $userService User Service
+     * @param TranslatorInterface  $translator  Translator
+     */
     public function __construct(private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator)
     {
     }
 
     /**
-     * @param Request $request
-     * @param UserPasswordHasherInterface $passwordHasher
-     * @return Response
+     * Register action,.
+     *
+     * @param Request                     $request        HTTP Request
+     * @param UserPasswordHasherInterface $passwordHasher Password Hasher
+     *
+     * @return Response HTTP response
      */
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher): Response
@@ -67,14 +75,16 @@ class SecurityController extends AbstractController
         ]);
     }
 
-
+    /**
+     * Login action.
+     *
+     * @param AuthenticationUtils $authenticationUtils Authentication Utils Object
+     *
+     * @return Response HTTP Response
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -83,6 +93,9 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    /**
+     * Logout action.
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {

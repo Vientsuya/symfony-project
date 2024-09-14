@@ -33,14 +33,15 @@ class TaskController extends AbstractController
 {
     /**
      * Constructor.
+     *
+     * @param TaskServiceInterface      $taskService      Task Service
+     * @param CommentServiceInterface   $commentService   Comment Service
+     * @param ThumbnailServiceInterface $thumbnailService Thumbnail Service
+     * @param TranslatorInterface       $translator       Translator
+     * @param UserRepository            $userRepository   User Repository
      */
-    public function __construct(
-        private readonly TaskServiceInterface $taskService,
-        private readonly CommentServiceInterface $commentService,
-        private readonly ThumbnailServiceInterface $thumbnailService,
-        private readonly TranslatorInterface $translator,
-        private readonly UserRepository $userRepository
-    ) {
+    public function __construct(private readonly TaskServiceInterface $taskService, private readonly CommentServiceInterface $commentService, private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly UserRepository $userRepository)
+    {
     }
 
     /**
@@ -81,7 +82,9 @@ class TaskController extends AbstractController
     /**
      * Show action.
      *
+     * @param int  $id   Id
      * @param Task $task Task
+     * @param int  $page Page
      *
      * @return Response HTTP response
      */

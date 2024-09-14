@@ -96,6 +96,7 @@ class TaskVoter extends Voter
      *
      * @param Task          $task Task entity
      * @param UserInterface $user User *
+     *
      * @return bool Result
      */
     private function canEdit(Task $task, UserInterface $user): bool
@@ -138,9 +139,6 @@ class TaskVoter extends Voter
      */
     private function canCreateComment(TokenInterface $token): bool
     {
-        if ($token->getUser() instanceof UserInterface) {
-            return true;
-        }
-        return false;
+        return $token->getUser() instanceof UserInterface;
     }
 }

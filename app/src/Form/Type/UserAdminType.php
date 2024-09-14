@@ -1,4 +1,7 @@
 <?php
+/*
+ * UserAdmin type.
+ */
 
 namespace App\Form\Type;
 

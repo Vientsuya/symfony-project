@@ -59,9 +59,12 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
-     * @param string $categoryName
-     * @param int $page
-     * @return PaginationInterface
+     * Get Tasks of a certain category.
+     *
+     * @param string $categoryName Category Name
+     * @param int    $page         Page
+     *
+     * @return PaginationInterface Pagination Interface
      */
     public function getTasksOfCategory(string $categoryName, int $page): PaginationInterface
     {
@@ -84,7 +87,6 @@ class CategoryService implements CategoryServiceInterface
     {
         $this->categoryRepository->save($category);
     }
-
 
     /**
      * Delete entity.
@@ -111,7 +113,7 @@ class CategoryService implements CategoryServiceInterface
         try {
             $result = $this->taskRepository->countByCategory($category);
 
-            return !($result > 0);
+            return $result <= 0;
         } catch (NoResultException|NonUniqueResultException) {
             return false;
         }

@@ -33,8 +33,10 @@ class TaskService implements TaskServiceInterface
     /**
      * Constructor.
      *
-     * @param TaskRepository     $taskRepository Task repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param TaskRepository     $taskRepository    Task repository
+     * @param UserRepository     $userRepository    User Repository
+     * @param CommentRepository  $commentRepository Comment Repository
+     * @param PaginatorInterface $paginator         Paginator
      */
     public function __construct(private readonly TaskRepository $taskRepository, private readonly UserRepository $userRepository, private readonly CommentRepository $commentRepository, readonly PaginatorInterface $paginator)
     {
@@ -109,6 +111,13 @@ class TaskService implements TaskServiceInterface
         );
     }
 
+    /**
+     * Get tasks given an id.
+     *
+     * @param int $id Id
+     *
+     * @return Task Task
+     */
     public function getTaskById(int $id): Task
     {
         return $this->taskRepository->find($id);

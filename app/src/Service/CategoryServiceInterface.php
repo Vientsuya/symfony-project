@@ -23,9 +23,10 @@ interface CategoryServiceInterface
     public function getPaginatedList(int $page): PaginationInterface;
 
     /**
-     * @param string $categoryName
-     * @param int $page
-     * @return PaginationInterface
+     * Get tasks of a certain category.
+     *
+     * @param string $categoryName Category name
+     * @param int    $page         Page
      */
     public function getTasksOfCategory(string $categoryName, int $page): PaginationInterface;
 

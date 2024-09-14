@@ -1,4 +1,7 @@
 <?php
+/*
+ * Category repository.
+ */
 
 namespace App\Repository;
 
@@ -11,6 +14,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class CategoryRepository.
+ *
  * @extends ServiceEntityRepository<Category>
  */
 class CategoryRepository extends ServiceEntityRepository
@@ -38,21 +43,10 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('category');
-    }
-
-    /**
      * Save entity.
      *
      * @param Category $category Category entity
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -76,5 +70,17 @@ class CategoryRepository extends ServiceEntityRepository
         assert($this->_em instanceof EntityManager);
         $this->_em->remove($category);
         $this->_em->flush();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('category');
     }
 }

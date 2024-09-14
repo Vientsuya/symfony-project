@@ -66,6 +66,13 @@ class TaskRepository extends ServiceEntityRepository
         ->orderBy('task.updatedAt', 'DESC');
     }
 
+    /**
+     * Query by category.
+     *
+     * @param string $category
+     *
+     * @return QueryBuilder
+     */
     public function queryByCategory(string $category): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
@@ -91,18 +98,6 @@ class TaskRepository extends ServiceEntityRepository
             ->setParameter('author', $user);
 
         return $queryBuilder;
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
     }
 
     /**
@@ -154,5 +149,17 @@ class TaskRepository extends ServiceEntityRepository
         assert($this->_em instanceof EntityManager);
         $this->_em->remove($task);
         $this->_em->flush();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('task');
     }
 }

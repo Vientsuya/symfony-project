@@ -1,4 +1,7 @@
 <?php
+/*
+ * Thumbnail entity.
+ */
 
 namespace App\Entity;
 
@@ -56,7 +59,8 @@ class Thumbnail
     /**
      * Setter for filename.
      *
-     * @param string $fileName
+     * @param string $fileName File name
+     *
      * @return Thumbnail
      */
     public function setFileName(string $fileName): static

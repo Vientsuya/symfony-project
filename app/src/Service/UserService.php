@@ -31,12 +31,16 @@ class UserService implements UserServiceInterface
      */
     private const PAGINATOR_ITEMS_PER_PAGE = 12;
 
-    public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly TaskRepository $taskRepository,
-        private readonly CommentRepository $commentRepository,
-        private readonly PaginatorInterface $paginator,
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param UserRepository     $userRepository    User Repository
+     * @param TaskRepository     $taskRepository    Task Repository
+     * @param CommentRepository  $commentRepository Comment Repository
+     * @param PaginatorInterface $paginator         Paginator
+     */
+    public function __construct(private readonly UserRepository $userRepository, private readonly TaskRepository $taskRepository, private readonly CommentRepository $commentRepository, private readonly PaginatorInterface $paginator)
+    {
     }
 
     /**

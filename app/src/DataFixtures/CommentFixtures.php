@@ -1,6 +1,6 @@
 <?php
 /**
- * Comment Fixtures
+ * Comment Fixtures.
  */
 
 namespace App\DataFixtures;
@@ -24,7 +24,7 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
      */
     public function loadData(): void
     {
-        if (null === $this->manager || null === $this->faker) {
+        if (!$this->manager instanceof \Doctrine\Persistence\ObjectManager || !$this->faker instanceof \Faker\Generator) {
             return;
         }
 
