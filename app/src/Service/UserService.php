@@ -102,4 +102,14 @@ class UserService implements UserServiceInterface
 
         $this->userRepository->delete($user);
     }
+
+    /**
+     * @param string $email Email
+     *
+     * @return User|null User object or null
+     */
+    public function findOneByEmail(string $email): ?User
+    {
+        return $this->userRepository->findOneBy(['email' => $email]);
+    }
 }

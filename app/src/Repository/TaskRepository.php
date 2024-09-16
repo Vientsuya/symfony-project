@@ -69,11 +69,9 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Query by category.
      *
-     * @param string $category
-     *
-     * @return QueryBuilder
+     * @return QueryBuilder Query Builder
      */
-    public function queryByCategory(string $category): QueryBuilder
+    public function queryByCategory(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
             ->select('task', 'category', 'thumbnail', 'author')

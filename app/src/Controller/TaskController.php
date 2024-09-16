@@ -9,10 +9,10 @@ use App\Entity\Task;
 use App\Entity\Thumbnail;
 use App\Entity\User;
 use App\Form\Type\TaskType;
-use App\Repository\UserRepository;
 use App\Service\CommentServiceInterface;
 use App\Service\TaskServiceInterface;
 use App\Service\ThumbnailServiceInterface;
+use App\Service\UserServiceInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,9 +38,9 @@ class TaskController extends AbstractController
      * @param CommentServiceInterface   $commentService   Comment Service
      * @param ThumbnailServiceInterface $thumbnailService Thumbnail Service
      * @param TranslatorInterface       $translator       Translator
-     * @param UserRepository            $userRepository   User Repository
+     * @param UserServiceInterface      $userService      User Service
      */
-    public function __construct(private readonly TaskServiceInterface $taskService, private readonly CommentServiceInterface $commentService, private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly UserRepository $userRepository)
+    public function __construct(private readonly TaskServiceInterface $taskService, private readonly CommentServiceInterface $commentService, private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly UserServiceInterface $userService)
     {
     }
 
@@ -73,7 +73,7 @@ class TaskController extends AbstractController
         // Get the email
         $email = $user->getUserIdentifier();
         // Fetch the full user entity from the database
-        $userEntity = $this->userRepository->findOneBy(['email' => $email]);
+        $userEntity = $this->userService->findOneByEmail($email);
         $pagination = $this->taskService->getusertasks($userEntity->getId(), $page);
 
         return $this->render('task/my_tasks.html.twig', ['pagination' => $pagination]);

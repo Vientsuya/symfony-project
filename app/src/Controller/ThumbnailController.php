@@ -7,7 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Thumbnail;
 use App\Form\Type\ThumbnailType;
-use App\Repository\TaskRepository;
+use App\Service\TaskServiceInterface;
 use App\Service\ThumbnailServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -27,9 +27,9 @@ class ThumbnailController extends AbstractController
      *
      * @param ThumbnailServiceInterface $thumbnailService Thumbnail service
      * @param TranslatorInterface       $translator       Translator
-     * @param TaskRepository            $taskRepository   TaskRepository
+     * @param TaskServiceInterface      $taskService      Task Service
      */
-    public function __construct(private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly TaskRepository $taskRepository)
+    public function __construct(private readonly ThumbnailServiceInterface $thumbnailService, private readonly TranslatorInterface $translator, private readonly TaskServiceInterface $taskService)
     {
     }
 
@@ -49,7 +49,7 @@ class ThumbnailController extends AbstractController
     )]
     public function create(Request $request, int $taskId): Response
     {
-        $task = $this->taskRepository->find($taskId);
+        $task = $this->taskService->getTaskById($taskId);
 
         if ($task->getThumbnail()) {
             return $this->redirectToRoute(
@@ -106,7 +106,7 @@ class ThumbnailController extends AbstractController
     )]
     public function edit(Request $request, Thumbnail $thumbnail, int $taskId): Response
     {
-        $task = $this->taskRepository->find($taskId);
+        $task = $this->taskService->getTaskById($taskId);
         if (!$task->getThumbnail()) {
             return $this->redirectToRoute('thumbnail_create');
         }

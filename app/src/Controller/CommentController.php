@@ -8,7 +8,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\Type\CommentType;
 use App\Service\CommentServiceInterface;
-use App\Service\TaskService;
+use App\Service\TaskServiceInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,10 +28,10 @@ class CommentController extends AbstractController
      * Constructor.
      *
      * @param CommentServiceInterface $commentService CommentService
-     * @param TaskService             $taskService    Task Service
+     * @param TaskServiceInterface    $taskService    Task Service
      * @param TranslatorInterface     $translator     Translator
      */
-    public function __construct(private readonly CommentServiceInterface $commentService, readonly TaskService $taskService, private readonly TranslatorInterface $translator)
+    public function __construct(private readonly CommentServiceInterface $commentService, readonly TaskServiceInterface $taskService, private readonly TranslatorInterface $translator)
     {
     }
 

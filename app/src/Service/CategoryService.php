@@ -69,7 +69,7 @@ class CategoryService implements CategoryServiceInterface
     public function getTasksOfCategory(string $categoryName, int $page): PaginationInterface
     {
         return $this->paginator->paginate(
-            $this->taskRepository->queryByCategory($categoryName),
+            $this->taskRepository->queryByCategory(),
             $page,
             TaskRepository::PAGINATOR_ITEMS_PER_PAGE
         );

@@ -28,25 +28,21 @@
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>
-                        <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action
-                        .show'|trans
+                        <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action.show'|trans
                         }}">
                             {{ category.title }}
                         </a>
                     </td>
                     <td>
-                        <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action
-                        .show'|trans }}">
+                        <a href="{{ url('show_task_list', {categoryName: category.title}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
 
-                        <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action
-                        .show'|trans }}">
+                        <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.edit'|trans }}
                         </a>
 
-                        <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action
-                        .show'|trans }}">
+                        <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.delete'|trans }}
                         </a>
                     </td>

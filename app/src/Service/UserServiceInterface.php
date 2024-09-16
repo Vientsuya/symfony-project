@@ -36,4 +36,11 @@ interface UserServiceInterface
      * @return PaginationInterface<string, mixed> Paginated list
      */
     public function getPaginatedList(int $page): PaginationInterface;
+
+    /**
+     * @param string $email Email
+     *
+     * @return User|null User object or null
+     */
+    public function findOneByEmail(string $email): ?User;
 }

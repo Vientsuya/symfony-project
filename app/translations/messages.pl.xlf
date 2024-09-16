@@ -198,8 +198,20 @@
                 <source>title.user_delete</source>
                 <target>Usuń użytkownika</target>
             </trans-unit>
+            <trans-unit id="title.user_create">
+                <source>title.user_create</source>
+                <target>Utwórz użytkownika</target>
+            </trans-unit>
+            <trans-unit id="title.my_task_list">
+                <source>title.my_task_list</source>
+                <target>Moja lista postów</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
+                <target>Pokaż</target>
+            </trans-unit>
+            <trans-unit id="action. show">
+                <source>action. show</source>
                 <target>Pokaż</target>
             </trans-unit>
             <trans-unit id="action.add_post">
@@ -277,6 +289,10 @@
             <trans-unit id="message.footer">
                 <source>message.footer</source>
                 <target>2024 Mój Blog. Wszelkie prawa zastrzeżone.</target>
+            </trans-unit>
+            <trans-unit id="message.edited_successfully">
+                <source>message.edited_successfully</source>
+                <target>Pomyślnie zedytowano.</target>
             </trans-unit>
         </body>
     </file>

@@ -198,6 +198,14 @@
                 <source>title.user_delete</source>
                 <target>Delete user</target>
             </trans-unit>
+            <trans-unit id="title.user_create">
+                <source>title.user_create</source>
+                <target>Create user</target>
+            </trans-unit>
+            <trans-unit id="title.my_task_list">
+                <source>title.my_task_list</source>
+                <target>My post list</target>
+            </trans-unit>
             <trans-unit id="button.sign_in">
                 <source>button.sign_in</source>
                 <target>Sign in</target>
@@ -208,6 +216,10 @@
             </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
+                <target>Show</target>
+            </trans-unit>
+            <trans-unit id="action. show">
+                <source>action. show</source>
                 <target>Show</target>
             </trans-unit>
             <trans-unit id="action.add_post">
@@ -277,6 +289,10 @@
             <trans-unit id="message.footer">
                 <source>message.footer</source>
                 <target>2024 My Blog. All rights reserved.</target>
+            </trans-unit>
+            <trans-unit id="message.edited_successfully">
+                <source>message.edited_successfully</source>
+                <target>Edited successfully</target>
             </trans-unit>
         </body>
     </file>
